@@ -7,8 +7,6 @@ class Group:
         self.__setDataName__(dataName)
         self.__setDataPriority__(dataPriority)
     
-    def __init_subclass__(cls) -> None:
-        pass
     def __setGroupName__(self, name: str) -> None:
         self.__groupName = name
     
@@ -24,17 +22,11 @@ class Group:
     def __setDataName__(self, data: list) -> None:
         self.__dataName = data
     
-    def __setNameInData__(self, data: list, index: int) -> None:
-        self.__dataName[index] = data
-
     def __getDataName__(self) -> list:
         return self.__dataName
     
     def __setDataPriority__(self, data: list) -> None:
         self.__dataPriority = data
-
-    def __setPriorityInData__(self, data: list, index: int) -> None:
-        self.__dataPriority[index] = data
 
     def __getDataPriority__(self) -> list:
         return self.__dataPriority
@@ -49,10 +41,13 @@ class Group:
         self.__setPriorityInData__(doc.getPriority(), self.getGroupLen() + 1)
 
     def orderByAlpha(self) -> None:
-        print(self.__getDataName__().sort())
+        aux = []
+        for x in self.__getDataName__():
+            aux.append(x.lower())
+        print(sorted(aux))
 
     def orderByPriority(self) -> None:
-        print(self.__getDataPriority__().sort())
+        print(sorted(self.__getDataPriority__()))
 
     
 

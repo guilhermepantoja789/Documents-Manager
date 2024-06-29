@@ -11,9 +11,8 @@ class Document(History):
         self.setDescription(description.__getDescription__())
         super().__init__(history)
 
-    def __init__(self, path: str) -> None:
-        with open(path) as file:
-            dataDict = json.load(file)
+    def __init__(self, data: dict) -> None:
+        dataDict = dict(data)
         name = dataDict["name"]
         priority = dataDict["priority"]
         tag = Tag(dataDict["tag"])
@@ -68,8 +67,6 @@ class Document(History):
         print("Tag do Documento: " + self.getTag())
         print("Detalhes do Documento: " + self.getDescription())
         print("Ultima Alteracao do Documento: " + self.getLastAlteration())
-
-
 
     def send() -> None:
         pass

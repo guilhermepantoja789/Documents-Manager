@@ -1,6 +1,7 @@
 from Proprieties import Tag
 from Proprieties import Description
 from Proprieties import History
+import json
 
 class Document(History):
     def __init__(self, name: str, priority: int, tag: Tag, description: Description, history: list) -> None:
@@ -10,8 +11,19 @@ class Document(History):
         self.setDescription(description.__getDescription__())
         super().__init__(history)
 
-    def __init_subclass__(cls) -> None:
-        pass
+    def __init__(self, path: str) -> None:
+        with open(path) as file:
+            dataDict = json.load(file)
+        name = dataDict["name"]
+        priority = dataDict["priority"]
+        tag = Tag(dataDict["tag"])
+        description = Description(dataDict["description"])
+        history = dataDict["history"]
+        self.setName(name)
+        self.setPriority(priority)
+        self.setTag(tag.__getTag__())
+        self.setDescription(description.__getDescription__())
+        super().__init__(history)
 
     def getName(self) -> str:
         return self.__name
@@ -49,7 +61,7 @@ class Document(History):
         pass
     def update() -> None:
         pass
-    
+
     def view(self) -> None:
         print("Nome do Documento: " + self.getName())
         print("Prioridade do Documento: " + str(self.getPriority()))

@@ -6,7 +6,7 @@ with open("proprieties.json") as file:
     data = json.load(file)
 list_of_names = []
 list_of_priorities = []
-for x in data["data"]:
+for x in data["group"]:
     doc = Document(x)
     list_of_names.append(doc.getName())
     list_of_priorities.append(doc.getPriority())
